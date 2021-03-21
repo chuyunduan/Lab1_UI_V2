@@ -1,0 +1,104 @@
+﻿<Window x:Class="Lab1_UI_V2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab1_UI_V2"
+        mc:Ignorable="d"
+        Title="Lab1_UI_V2" Height="500" Width="900"
+        Closing="Window_Closing">
+
+    <Window.Resources>
+        <CollectionViewSource  Source="{Binding}"  
+                               x:Key="key_view_DataCollection" Filter="DataCollection"/>
+        <CollectionViewSource  Source="{Binding}"
+                               x:Key="key_view_DataOnGrid" Filter="DataOnGrid"/>
+
+        <DataTemplate x:Key="Details">
+            <StackPanel Margin="5">
+                <TextBlock FontSize="12" Text="{Binding Path=Vector}" HorizontalAlignment="Left" />
+                <TextBlock FontSize="12" Text="{Binding Path=Complex}" HorizontalAlignment="Left" />
+            </StackPanel>
+        </DataTemplate>
+
+    </Window.Resources>
+
+
+    <Grid>
+        <GridSplitter Grid.Row="1"
+                      Grid.Column="0"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center" />
+
+        <GridSplitter Grid.Row="0"
+                      Grid.Column="1"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Center" />
+
+        <Menu x:Name="File" FontSize="25" VerticalContentAlignment="Top" Margin="0,0,686,413">
+            <MenuItem Header="File" Height="55" Width="70" Click="MenuItem_Click">
+                <MenuItem x:Name="New_btn" Header="New" Click="New_btn_Click"/>
+                <MenuItem x:Name="Open_btn" Header="Open" Click="Open_btn_Click"/>
+                <MenuItem x:Name="Save_btn" Header="Save" Click="Save_Click"/>
+            </MenuItem>
+        </Menu>
+        <Menu x:Name="Edit" FontSize="25" VerticalContentAlignment="Top" Margin="65,0,601,413">
+            <MenuItem Header="Edit" Height="55" Width="70">
+                <MenuItem x:Name="AddDef_btn" Header="Add Defaults" Click="AddDef_btn_Click"/>
+                <MenuItem x:Name="AddDefDC_btn" Header="Add Default V2DataCollection" Click="AddDefDC_btn_Click"/>
+                <MenuItem x:Name="AddDefDOG_btn" Header="Add Default V2DataOnGrid" Click="AddDefDOG_btn_Click"/>
+                <MenuItem x:Name="AddElemFile_btn" Header="Add Element from File" Click="AddElemFile_btn_Click"/>
+                <MenuItem x:Name="Remove_btn" Header="Remove" Click="Remove_btn_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <ListBox x:Name="listBox_Main"
+                 ItemsSource="{Binding}"
+                 Margin="500,40,50,300" Grid.Column="1" SelectionChanged="listBox_Main_SelectionChanged"/>
+
+        <ListBox x:Name="listBox_DataCollection" 
+                 ItemsSource="{Binding Source={StaticResource key_view_DataCollection}}"
+                 Margin="50,300,500,50" Grid.Column="1"/>
+
+        <ListBox x:Name="listBox_DataOnGrid" 
+                 ItemsSource="{Binding Source={StaticResource key_view_DataOnGrid}}"
+                 Margin="500,300,50,50" Grid.Column="1"/>
+
+        <TextBlock x:Name="Average" HorizontalAlignment="Left" 
+                   Text="{Binding Path=Average}"
+                   Margin="200,100,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Height="50" Width="200"/>
+
+        <TextBlock x:Name="CollectionChangedAfterSave" HorizontalAlignment="Left" 
+                   Text="{Binding Path=CollectionChangedAfterSave}"
+                   Margin="300,30,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top"
+                   Height="100" 
+                   Width="180" Grid.Column="1"/>
+
+        <ListBox x:Name="listbox_details" 
+                 ItemsSource ="{Binding ElementName=listBox_DataCollection, Path=SelectedItem}"
+                 ItemTemplate="{StaticResource Details}"
+                 Margin="500,200,50,200" Grid.Column="1">
+        </ListBox>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="100,220,0,0" 
+                   Text="{Binding ElementName=listBox_DataOnGrid, Path=SelectedItem.Min}"
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Height="30" 
+                   Width="255" Grid.Column="1"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="100,170,0,0" 
+                   Text="{Binding ElementName=listBox_DataOnGrid, Path=SelectedItem.Max}" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Width="255" 
+                   Height="30" Grid.Column="1"/>
+    </Grid>
+</Window>
