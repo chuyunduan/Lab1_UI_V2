@@ -35,15 +35,15 @@
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Center" />
 
-        <Menu x:Name="File" FontSize="25" VerticalContentAlignment="Top" Margin="0,0,686,413">
-            <MenuItem Header="File" Height="55" Width="70" Click="MenuItem_Click">
+        <Menu x:Name="File" FontSize="20" VerticalContentAlignment="Top" Margin="0,0,820,413">
+            <MenuItem Header="File" Height="55" Click="MenuItem_Click">
                 <MenuItem x:Name="New_btn" Header="New" Click="New_btn_Click"/>
                 <MenuItem x:Name="Open_btn" Header="Open" Click="Open_btn_Click"/>
                 <MenuItem x:Name="Save_btn" Header="Save" Click="Save_Click"/>
             </MenuItem>
         </Menu>
-        <Menu x:Name="Edit" FontSize="25" VerticalContentAlignment="Top" Margin="65,0,601,413">
-            <MenuItem Header="Edit" Height="55" Width="70">
+        <Menu x:Name="Edit" FontSize="20" VerticalContentAlignment="Top" Margin="65,0,750,413">
+            <MenuItem Header="Edit" Height="55">
                 <MenuItem x:Name="AddDef_btn" Header="Add Defaults" Click="AddDef_btn_Click"/>
                 <MenuItem x:Name="AddDefDC_btn" Header="Add Default V2DataCollection" Click="AddDefDC_btn_Click"/>
                 <MenuItem x:Name="AddDefDOG_btn" Header="Add Default V2DataOnGrid" Click="AddDefDOG_btn_Click"/>
@@ -52,18 +52,22 @@
             </MenuItem>
         </Menu>
 
+        <TextBlock HorizontalAlignment="Left" Margin="500,25,50,300" Text="Main Collection:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <ListBox x:Name="listBox_Main"
                  ItemsSource="{Binding}"
                  Margin="500,40,50,300" Grid.Column="1" SelectionChanged="listBox_Main_SelectionChanged"/>
 
+        <TextBlock HorizontalAlignment="Left" Margin="50,280,500,50" TextWrapping="Wrap" VerticalAlignment="Top" Height="15"><Run Text="Data Collection:"/><LineBreak/><Run/></TextBlock>
         <ListBox x:Name="listBox_DataCollection" 
                  ItemsSource="{Binding Source={StaticResource key_view_DataCollection}}"
                  Margin="50,300,500,50" Grid.Column="1"/>
 
+        <TextBlock HorizontalAlignment="Left" Margin="500,285,50,50" TextWrapping="Wrap" VerticalAlignment="Top" ><Run Text="Data On Grid:"/><LineBreak/><Run/></TextBlock>
         <ListBox x:Name="listBox_DataOnGrid" 
                  ItemsSource="{Binding Source={StaticResource key_view_DataOnGrid}}"
                  Margin="500,300,50,50" Grid.Column="1"/>
 
+        <TextBlock HorizontalAlignment="Left" Margin="200,80,0,0" Text="Average:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock x:Name="Average" HorizontalAlignment="Left" 
                    Text="{Binding Path=Average}"
                    Margin="200,100,0,0" 
@@ -71,6 +75,7 @@
                    VerticalAlignment="Top" 
                    Height="50" Width="200"/>
 
+        <TextBlock HorizontalAlignment="Left" Margin="300,12,0,0" Text="Save state:" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
         <TextBlock x:Name="CollectionChangedAfterSave" HorizontalAlignment="Left" 
                    Text="{Binding Path=CollectionChangedAfterSave}"
                    Margin="300,30,0,0" 
@@ -79,19 +84,14 @@
                    Height="100" 
                    Width="180" Grid.Column="1"/>
 
+        <TextBlock HorizontalAlignment="Left" Margin="500,185,50,200" Text="Details:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <ListBox x:Name="listbox_details" 
                  ItemsSource ="{Binding ElementName=listBox_DataCollection, Path=SelectedItem}"
                  ItemTemplate="{StaticResource Details}"
                  Margin="500,200,50,200" Grid.Column="1">
         </ListBox>
 
-        <TextBlock HorizontalAlignment="Left" 
-                   Margin="100,220,0,0" 
-                   Text="{Binding ElementName=listBox_DataOnGrid, Path=SelectedItem.Min}"
-                   TextWrapping="Wrap" 
-                   VerticalAlignment="Top" 
-                   Height="30" 
-                   Width="255" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,170,0,0" Text="Max in Grid:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
         <TextBlock HorizontalAlignment="Left" 
                    Margin="100,170,0,0" 
@@ -100,5 +100,15 @@
                    VerticalAlignment="Top" 
                    Width="255" 
                    Height="30" Grid.Column="1"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="30,220,0,0" Text="Min in Grid:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="100,220,0,0" 
+                   Text="{Binding ElementName=listBox_DataOnGrid, Path=SelectedItem.Min}"
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Height="30" 
+                   Width="255" Grid.Column="1"/>
+
     </Grid>
 </Window>

@@ -51,6 +51,7 @@ namespace Lab1_UI_V2
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             if ((bool)dialog.ShowDialog())
                 mainCollection.AddElementFromFile(dialog.FileName);
+            MessageError();
         }
 
         private void Remove_btn_Click(object sender, RoutedEventArgs e)
@@ -58,11 +59,8 @@ namespace Lab1_UI_V2
             var selectedMain = this.listBox_Main.SelectedItems;
             List<V2Data> selectedItems = new List<V2Data>();
             selectedItems.AddRange(selectedMain.Cast<V2Data>());
-
             foreach (V2Data item in selectedItems)
-            {
                 mainCollection.Remove(item.Info, item.Freq);
-            }
         }
 
         private void DataCollection(object sender, FilterEventArgs args)
@@ -118,7 +116,7 @@ namespace Lab1_UI_V2
 
         private bool UnsavedChanges()
         {
-            MessageBoxResult message = MessageBox.Show("You have unsaved changes. Do you want save it?", "Save", MessageBoxButton.YesNoCancel);
+            MessageBoxResult message = MessageBox.Show("Do you want save records?", "Save", MessageBoxButton.YesNoCancel);
             if (message == MessageBoxResult.Yes)
             {
                 Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
@@ -126,18 +124,14 @@ namespace Lab1_UI_V2
                     mainCollection.Save(dialog.FileName);
             }
             else if (message == MessageBoxResult.Cancel)
-            {
                 return true;
-            }
             return false;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs cl)
         {
             if (mainCollection.CollectionChangedAfterSave)
-            {
                 cl.Cancel = UnsavedChanges();
-            }
             MessageError();
         }
 

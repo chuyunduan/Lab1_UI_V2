@@ -121,11 +121,18 @@ namespace ClassLibrary
 
         public void Add(V2Data item)
         {
-            v2Datas.Add(item);
-            OnCollectionChanged(NotifyCollectionChangedAction.Add);
-            OnPropertyChanged("Average");
-            CollectionChangedAfterSave = true;
-            OnPropertyChanged("CollectionChangedAfterSave");
+            try
+            {
+                v2Datas.Add(item);
+                OnCollectionChanged(NotifyCollectionChangedAction.Add);
+                OnPropertyChanged("Average");
+                CollectionChangedAfterSave = true;
+                OnPropertyChanged("CollectionChangedAfterSave");
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = "Add failed: " + ex.Message;
+            }
         }
 
         public bool Remove(string id, double w)
@@ -190,7 +197,7 @@ namespace ClassLibrary
 
         public void AddDefaultDataCollection()
         {
-            V2DataCollection collection = new V2DataCollection("aaaaaaaaa ", 1);
+            V2DataCollection collection = new V2DataCollection("Default", 1);
             collection.initRandom(4, 10, 10, 0, 100);
             this.Add(collection);
         }
@@ -206,15 +213,44 @@ namespace ClassLibrary
 
         public void AddElementFromFile(string filename)
         {
-            V2DataOnGrid datas = new V2DataOnGrid(filename);
-            this.Add(datas);
+            try
+            {
+                V2DataOnGrid datas = new V2DataOnGrid(filename);
+                this.Add(datas);
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = "Add failed:  " + ex.Message;
+            }
         }
 
         public override string ToString()
         {
             string ret = String.Empty;
-            foreach (V2Data data in v2Datas)
-                ret += (data.ToString() + '\n');
+            try
+            {
+                foreach (V2Data data in v2Datas)
+                    ret += (data.ToString() + '\n');
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = "ERROR To String: " + ex.Message;
+            }
+            return ret;
+        }
+
+        public string ToLongString(string format)
+        {
+            string ret = String.Empty;
+            try
+            {
+                foreach (V2Data data in v2Datas)
+                    ret += (data.ToLongString(format) + '\n');
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = "ERROR ToLongString: " + ex.Message;
+            }
             return ret;
         }
 
@@ -228,13 +264,6 @@ namespace ClassLibrary
             return ((IEnumerable)v2Datas).GetEnumerator();
         }
 
-        public string ToLongString(string format)
-        {
-            string ret = String.Empty;
-            foreach (V2Data data in v2Datas)
-                ret += (data.ToLongString(format) + '\n');
-            return ret;
-        }
         public double Average
         {
             get

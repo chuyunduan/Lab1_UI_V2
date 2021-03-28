@@ -24,6 +24,48 @@ namespace ClassLibrary
             Grids = new Grid1D[2] { ox, oy };
         }
 
+        public double Max
+        {
+            get
+            {
+                double ret = 0;
+                if (Grids[0].Count > 0 && Grids[1].Count > 0)
+                {
+                    ret = Node[0, 0].Magnitude;
+                    for (int i = 0; i < Grids[0].Count; i++)
+                    {
+                        for (int j = 0; j < Grids[1].Count; j++)
+                        {
+                            if (ret < Node[i, j].Magnitude)
+                                ret = Node[i, j].Magnitude;
+                        }
+                    }
+                }
+                return ret;
+            }
+        }
+
+        public double Min
+        {
+            get
+            {
+                double ret = 0;
+                if (Grids[0].Count > 0 && Grids[1].Count > 0)
+                {
+                    ret = Node[0, 0].Magnitude;
+                    for (int i = 0; i < Grids[0].Count; i++)
+                    {
+                        for (int j = 0; j < Grids[1].Count; j++)
+                        {
+                            if (ret > Node[i, j].Magnitude)
+                                ret = Node[i, j].Magnitude;
+                        }
+                    }
+                }
+                return ret;
+            }
+        }
+
         public V2DataOnGrid(string filename) : base()
         {
 
@@ -79,7 +121,8 @@ namespace ClassLibrary
             }
             finally
             {
-                if (f != null) f.Close();
+                if (f != null) 
+                    f.Close();
             }
         }
 
