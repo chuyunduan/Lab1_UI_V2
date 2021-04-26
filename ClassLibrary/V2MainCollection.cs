@@ -128,7 +128,10 @@ namespace ClassLibrary
                     OnPropertyChanged("CollectionChangedAfterSave");
                     break;
                 }
-                i++;
+                else
+                {
+                    i++;
+                }
             }
             return flag;
         }

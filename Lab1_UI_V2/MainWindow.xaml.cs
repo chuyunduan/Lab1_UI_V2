@@ -62,7 +62,6 @@ namespace Lab1_UI_V2
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.Multiselect = false;
             dlg.Filter = "TXTFiles|*.txt";
-
             if ((bool)dlg.ShowDialog())
                 mainCollection.AddElementFromFile(dlg.FileName);
             MessageError();
@@ -70,11 +69,11 @@ namespace Lab1_UI_V2
 
         private void Remove_btn_Click(object sender, RoutedEventArgs e)
         {
-            var selectedMain = this.listBox_Main.SelectedItems;
+            var selected = this.listBox_Main.SelectedItems;
             if (this.listBox_Main.SelectedItems.Count != 0)
             {
                 List<V2Data> selectedItems = new List<V2Data>();
-                selectedItems.AddRange(selectedMain.Cast<V2Data>());
+                selectedItems.AddRange(selected.Cast<V2Data>());
                 foreach (V2Data item in selectedItems)
                     mainCollection.Remove(item.Info, item.Freq);
             }
