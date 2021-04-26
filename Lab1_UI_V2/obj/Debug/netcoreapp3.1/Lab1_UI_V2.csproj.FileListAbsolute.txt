@@ -1,8 +1,3 @@
-C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2.csprojAssemblyReference.cache
-C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\MainWindow.g.cs
-C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\App.g.cs
-C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2_MarkupCompile.cache
-C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2_MarkupCompile.lref
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\Lab1_UI_V2.exe
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\Lab1_UI_V2.deps.json
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\Lab1_UI_V2.runtimeconfig.json
@@ -11,6 +6,11 @@ C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\Lab1_U
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\Lab1_UI_V2.pdb
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\ClassLibrary.dll
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\bin\Debug\netcoreapp3.1\ClassLibrary.pdb
+C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2.csprojAssemblyReference.cache
+C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2_MarkupCompile.cache
+C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2_MarkupCompile.lref
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2.g.resources
 C:\Users\chenr\source\repos\Lab1_UI_V2\Lab1_UI_V2\obj\Debug\netcoreapp3.1\Lab1_UI_V2.AssemblyInfoInputs.cache

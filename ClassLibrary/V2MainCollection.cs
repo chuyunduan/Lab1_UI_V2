@@ -8,7 +8,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.CompilerServices;
 using System.Collections.Specialized;
 using System.IO;
-using System.Text;
 
 [assembly: InternalsVisibleToAttribute("Lab1_UI_V2")]
 
@@ -69,27 +68,6 @@ namespace ClassLibrary
                 OnPropertyChanged("CollectionChangedAfterSave");
             }
         }
-
-        /*public void Save(string filename)
-        {
-            try
-            {
-                FileStream FS = new StreamWriter(filename,true);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(FS, v2Datas);
-            }
-            catch (Exception ex)
-            {
-                this.ErrorMessage = "Save: " + ex.Message;
-            }
-            finally
-            {
-                if (FS != null)
-                    FS.Close();
-                CollectionChangedAfterSave = false;
-                OnPropertyChanged("CollectionChangedAfterSave");
-            }
-        }*/
 
         public void Load(string filename)
         {
@@ -177,7 +155,7 @@ namespace ClassLibrary
                 this.Add(collections[i]);
             }
 
-            /*Grid1D NULLOX = new Grid1D(0, 0);
+            Grid1D NULLOX = new Grid1D(0, 0);
             Grid1D NULLOY = new Grid1D(0, 0);
             mag[3] = new V2DataOnGrid("NULL", 10, NULLOX, NULLOY);
             collections[3] = new V2DataCollection("NULL", 10);
@@ -185,7 +163,7 @@ namespace ClassLibrary
             mag[3].initRandom(0, 10);
             collections[3].initRandom(0, 10, 10, 0, 10);
             this.Add(mag[3]);
-            this.Add(collections[3]);*/
+            this.Add(collections[3]);
 
         }
 

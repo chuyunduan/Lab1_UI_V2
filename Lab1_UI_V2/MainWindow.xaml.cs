@@ -1,19 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.CompilerServices;
 using ClassLibrary;
 
 namespace Lab1_UI_V2
@@ -29,6 +18,28 @@ namespace Lab1_UI_V2
         {
             InitializeComponent();
             DataContext = mainCollection;
+        }
+
+        private void DataCollection(object sender, FilterEventArgs args)
+        {
+            var item = args.Item;
+            if (item != null)
+            {
+                if (item.GetType() == typeof(V2DataCollection)) 
+                    args.Accepted = true;
+                else args.Accepted = false;
+            }
+        }
+
+        private void DataOnGrid(object sender, FilterEventArgs args)
+        {
+            var item = args.Item;
+            if (item != null)
+            {
+                if (item.GetType() == typeof(V2DataOnGrid)) 
+                    args.Accepted = true;
+                else args.Accepted = false;
+            }
         }
 
         private void AddDef_btn_Click(object sender, RoutedEventArgs e)
@@ -48,39 +59,47 @@ namespace Lab1_UI_V2
 
         private void AddElemFile_btn_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-            if ((bool)dialog.ShowDialog())
-                mainCollection.AddElementFromFile(dialog.FileName);
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Multiselect = false;
+            dlg.Filter = "TXTFiles|*.txt";
+
+            if ((bool)dlg.ShowDialog())
+                mainCollection.AddElementFromFile(dlg.FileName);
             MessageError();
         }
 
         private void Remove_btn_Click(object sender, RoutedEventArgs e)
         {
             var selectedMain = this.listBox_Main.SelectedItems;
-            List<V2Data> selectedItems = new List<V2Data>();
-            selectedItems.AddRange(selectedMain.Cast<V2Data>());
-            foreach (V2Data item in selectedItems)
-                mainCollection.Remove(item.Info, item.Freq);
-        }
-
-        private void DataCollection(object sender, FilterEventArgs args)
-        {
-            var item = args.Item;
-            if (item != null)
+            if (this.listBox_Main.SelectedItems.Count != 0)
             {
-                if (item.GetType() == typeof(V2DataCollection)) args.Accepted = true;
-                else args.Accepted = false;
+                List<V2Data> selectedItems = new List<V2Data>();
+                selectedItems.AddRange(selectedMain.Cast<V2Data>());
+                foreach (V2Data item in selectedItems)
+                    mainCollection.Remove(item.Info, item.Freq);
+            }
+            else
+            {
+                mainCollection = new V2MainCollection();
+                DataContext = mainCollection;
             }
         }
 
-        private void DataOnGrid(object sender, FilterEventArgs args)
+        private bool UnsavedChanges()
         {
-            var item = args.Item;
-            if (item != null)
+            MessageBoxResult mes = MessageBox.Show("Do you want save records?", "Save", MessageBoxButton.YesNoCancel);
+            if (mes == MessageBoxResult.Yes)
             {
-                if (item.GetType() == typeof(V2DataOnGrid)) args.Accepted = true;
-                else args.Accepted = false;
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                dlg.FileName = "Inf";
+                dlg.DefaultExt = ".txt";
+                dlg.Filter = "TXTFiles(.txt)|*.txt";
+                if ((bool)dlg.ShowDialog())
+                    mainCollection.Save(dlg.FileName);
             }
+            else if (mes == MessageBoxResult.Cancel)
+                return true;
+            return false;
         }
 
         private void New_btn_Click(object sender, RoutedEventArgs e)
@@ -94,9 +113,12 @@ namespace Lab1_UI_V2
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
-            if ((bool)dialog.ShowDialog())
-                mainCollection.Save(dialog.FileName);
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Inf";
+            dlg.DefaultExt = ".txt";
+            dlg.Filter = "TXTFiles(.txt)|*.txt";
+            if ((bool)dlg.ShowDialog())
+                mainCollection.Save(dlg.FileName);
             MessageError();
         }
 
@@ -104,28 +126,14 @@ namespace Lab1_UI_V2
         {
             if (mainCollection.CollectionChangedAfterSave)
                 UnsavedChanges();
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-            if ((bool)dialog.ShowDialog())
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            if ((bool)dlg.ShowDialog())
             {
                 mainCollection = new V2MainCollection();
-                mainCollection.Load(dialog.FileName);
+                mainCollection.Load(dlg.FileName);
                 DataContext = mainCollection;
             }
             MessageError();
-        }
-
-        private bool UnsavedChanges()
-        {
-            MessageBoxResult message = MessageBox.Show("Do you want save records?", "Save", MessageBoxButton.YesNoCancel);
-            if (message == MessageBoxResult.Yes)
-            {
-                Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
-                if ((bool)dialog.ShowDialog())
-                    mainCollection.Save(dialog.FileName);
-            }
-            else if (message == MessageBoxResult.Cancel)
-                return true;
-            return false;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs cl)
@@ -144,14 +152,5 @@ namespace Lab1_UI_V2
             }
         }
 
-        private void listBox_Main_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

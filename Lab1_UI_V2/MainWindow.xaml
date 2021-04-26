@@ -34,9 +34,9 @@
                       Grid.Column="1"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Center" />
-
+        
         <Menu x:Name="File" FontSize="20" VerticalContentAlignment="Top" Margin="0,0,820,413">
-            <MenuItem Header="File" Height="55" Click="MenuItem_Click">
+            <MenuItem Header="File" Height="55">
                 <MenuItem x:Name="New_btn" Header="New" Click="New_btn_Click"/>
                 <MenuItem x:Name="Open_btn" Header="Open" Click="Open_btn_Click"/>
                 <MenuItem x:Name="Save_btn" Header="Save" Click="Save_Click"/>
@@ -52,10 +52,10 @@
             </MenuItem>
         </Menu>
 
-        <TextBlock HorizontalAlignment="Left" Margin="500,25,50,300" Text="Main Collection:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ListBox x:Name="listBox_Main"
+        <TextBlock HorizontalAlignment="Left" Margin="500,25,50,300" Text="Main Collection:(Press Crtl to select multiple)" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBox_Main" SelectionMode="Extended"
                  ItemsSource="{Binding}"
-                 Margin="500,40,50,300" Grid.Column="1" SelectionChanged="listBox_Main_SelectionChanged"/>
+                 Margin="500,40,50,300" Grid.Column="1" />
 
         <TextBlock HorizontalAlignment="Left" Margin="50,280,500,50" TextWrapping="Wrap" VerticalAlignment="Top" Height="15"><Run Text="Data Collection:"/><LineBreak/><Run/></TextBlock>
         <ListBox x:Name="listBox_DataCollection" 
@@ -109,6 +109,5 @@
                    VerticalAlignment="Top" 
                    Height="30" 
                    Width="255" Grid.Column="1"/>
-
     </Grid>
 </Window>

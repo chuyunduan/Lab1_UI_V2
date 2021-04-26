@@ -225,7 +225,6 @@ namespace ClassLibrary
             }
         }
 
-
     IEnumerator IEnumerable.GetEnumerator()
         {
             V2DataCollection ret = new V2DataCollection(Info, Freq);
