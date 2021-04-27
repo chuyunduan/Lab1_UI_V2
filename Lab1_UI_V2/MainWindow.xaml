@@ -27,7 +27,7 @@
         <GridSplitter
                       Grid.Column="0"
                       HorizontalAlignment="Stretch"
-                      VerticalAlignment="Top" Margin="11,407,-11,0" />
+                      VerticalAlignment="Center" Margin="10,0,-10,0" />
 
         <GridSplitter Grid.Row="0"
                       Grid.Column="1"
