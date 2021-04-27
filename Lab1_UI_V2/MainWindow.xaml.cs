@@ -150,6 +150,5 @@ namespace Lab1_UI_V2
                 mainCollection.ErrorMessage = null;
             }
         }
-
     }
 }
